@@ -9,8 +9,9 @@
 #import "ViewController.h"
 
 @interface ViewController () {
-    __weak IBOutlet UIImageView *squareImageView;
-    CGPoint firstCenter;
+    __weak IBOutlet UIImageView *_squareImageView;
+    CGPoint _firstCenter;
+    CGFloat _lastRotation;
 }
 
 @end
@@ -29,13 +30,16 @@
     
     UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureRecognized:)];
     
+    UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationGestureRecognized:)];
+    
     
     [self.view addGestureRecognizer:tapRecognizer];
-    [squareImageView addGestureRecognizer:panRecognizer];
-    [squareImageView addGestureRecognizer:pinchRecognizer];
-    [squareImageView setTranslatesAutoresizingMaskIntoConstraints:YES];
+    [_squareImageView addGestureRecognizer:panRecognizer];
+    [self.view addGestureRecognizer:pinchRecognizer];
+    [self.view addGestureRecognizer:rotationRecognizer];
+    [_squareImageView setTranslatesAutoresizingMaskIntoConstraints:YES];
     
-    firstCenter = [squareImageView center];
+    _firstCenter = [_squareImageView center];
     NSLog(@"%@", panRecognizer);
 }
 
@@ -51,18 +55,18 @@
     
     // 사용자가 사각형을 터치하는 순간, 사각형의 Center 값을 저장
     if ([rec state] == UIGestureRecognizerStateBegan) {
-        firstCenter.x = [[sender view] center].x;
-        firstCenter.y = [[sender view] center].y;
-        NSLog(@"%f %f", firstCenter.x, firstCenter.y);
+        _firstCenter.x = [[sender view] center].x;
+        _firstCenter.y = [[sender view] center].y;
+        NSLog(@"%f %f", _firstCenter.x, _firstCenter.y);
     }
     
     // 사용자의 이동에 따라 초기 center값 보정 후, 사각형의 좌표값 갱신
-    translatedPoint = CGPointMake(firstCenter.x+translatedPoint.x, firstCenter.y+translatedPoint.y);
+    translatedPoint = CGPointMake(_firstCenter.x+translatedPoint.x, _firstCenter.y+translatedPoint.y);
     [[rec view] setCenter:translatedPoint];
     
     // 사용자가 손을 떼는 순간 처음 위치 초기화
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded) {
-        [[rec view] setCenter:firstCenter];
+        [[rec view] setCenter:_firstCenter];
     }
 }
 
@@ -70,14 +74,14 @@
     UIPanGestureRecognizer *rec = (UIPanGestureRecognizer*)sender;
     CGPoint point = [rec locationInView:self.view];
     NSLog(@"%f %f", point.x, point.y);
-    [squareImageView setCenter:point];
+    [_squareImageView setCenter:point];
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     if ( event.subtype == UIEventSubtypeMotionShake )
     {
-        [squareImageView setCenter:firstCenter];
+        [_squareImageView setCenter:_firstCenter];
     }
     
     if ( [super respondsToSelector:@selector(motionEnded:withEvent:)] )
@@ -91,14 +95,37 @@
 - (void) pinchGestureRecognized:(id)sender {
     UIPinchGestureRecognizer *rec = (UIPinchGestureRecognizer*)sender;
     if (rec.state == UIGestureRecognizerStateEnded || rec.state == UIGestureRecognizerStateChanged) {
-        
-        CGFloat currentScale = squareImageView.frame.size.width / squareImageView.bounds.size.width;
-        CGFloat newScale = currentScale * [rec scale];
-
-        CGAffineTransform transform = CGAffineTransformMakeScale(newScale, newScale);
-        [squareImageView setTransform:transform];
-        
-        [rec setScale:1];
+        [self scaleUsingTransform:rec];
     }
 }
+
+- (void) scaleUsingTransform:(UIPinchGestureRecognizer*)rec {
+    CGFloat currentScale = _squareImageView.frame.size.width / _squareImageView.bounds.size.width;
+    CGFloat newScale = currentScale * [rec scale];
+    
+    CGAffineTransform transform = CGAffineTransformMakeScale(newScale, newScale);
+    [_squareImageView setTransform:transform];
+    
+    [rec setScale:1];
+}
+
+- (void) rotationGestureRecognized:(id)sender {
+    UIRotationGestureRecognizer *rec = (UIRotationGestureRecognizer*)sender;
+    
+    // 손을 떼는 순간 초기화
+    if(rec.state == UIGestureRecognizerStateEnded) {
+        _lastRotation = 0.0f;
+        return;
+    }
+    
+    // 부호 반대로
+    CGFloat rotation = 0.0 - (_lastRotation - [rec rotation]);
+    
+    CGAffineTransform currentTransform = _squareImageView.transform;
+    CGAffineTransform newTransform = CGAffineTransformRotate(currentTransform, rotation);
+    [_squareImageView setTransform:newTransform];
+    _lastRotation = [rec rotation];
+}
+
+
 @end
