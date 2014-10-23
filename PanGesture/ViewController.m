@@ -27,11 +27,13 @@
                                                                                     action:@selector(tapGestureRecogznied:)];
     [tapRecognizer setNumberOfTapsRequired:2];
     
-    
+    UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureRecognized:)];
     
     
     [self.view addGestureRecognizer:tapRecognizer];
     [squareImageView addGestureRecognizer:panRecognizer];
+    [squareImageView addGestureRecognizer:pinchRecognizer];
+    [squareImageView setTranslatesAutoresizingMaskIntoConstraints:YES];
     
     firstCenter = [squareImageView center];
     NSLog(@"%@", panRecognizer);
@@ -85,4 +87,18 @@
 - (BOOL)canBecomeFirstResponder
 { return YES; }
 
+
+- (void) pinchGestureRecognized:(id)sender {
+    UIPinchGestureRecognizer *rec = (UIPinchGestureRecognizer*)sender;
+    if (rec.state == UIGestureRecognizerStateEnded || rec.state == UIGestureRecognizerStateChanged) {
+        
+        CGFloat currentScale = squareImageView.frame.size.width / squareImageView.bounds.size.width;
+        CGFloat newScale = currentScale * [rec scale];
+
+        CGAffineTransform transform = CGAffineTransformMakeScale(newScale, newScale);
+        [squareImageView setTransform:transform];
+        
+        [rec setScale:1];
+    }
+}
 @end
