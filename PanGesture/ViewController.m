@@ -10,8 +10,7 @@
 
 @interface ViewController () {
     __weak IBOutlet UIImageView *squareImageView;
-    float firstX;
-    float firstY;
+    CGPoint firstCenter;
 }
 
 @end
@@ -29,8 +28,12 @@
     [tapRecognizer setNumberOfTapsRequired:2];
     
     
+    
+    
     [self.view addGestureRecognizer:tapRecognizer];
     [squareImageView addGestureRecognizer:panRecognizer];
+    
+    firstCenter = [squareImageView center];
     NSLog(@"%@", panRecognizer);
 }
 
@@ -46,18 +49,18 @@
     
     // 사용자가 사각형을 터치하는 순간, 사각형의 Center 값을 저장
     if ([rec state] == UIGestureRecognizerStateBegan) {
-        firstX = [[sender view] center].x;
-        firstY = [[sender view] center].y;
-        NSLog(@"%f %f", firstX, firstY);
+        firstCenter.x = [[sender view] center].x;
+        firstCenter.y = [[sender view] center].y;
+        NSLog(@"%f %f", firstCenter.x, firstCenter.y);
     }
     
     // 사용자의 이동에 따라 초기 center값 보정 후, 사각형의 좌표값 갱신
-    translatedPoint = CGPointMake(firstX+translatedPoint.x, firstY+translatedPoint.y);
+    translatedPoint = CGPointMake(firstCenter.x+translatedPoint.x, firstCenter.y+translatedPoint.y);
     [[rec view] setCenter:translatedPoint];
     
     // 사용자가 손을 떼는 순간 처음 위치 초기화
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded) {
-        [[rec view] setCenter:CGPointMake(firstX, firstY)];
+        [[rec view] setCenter:firstCenter];
     }
 }
 
@@ -67,5 +70,19 @@
     NSLog(@"%f %f", point.x, point.y);
     [squareImageView setCenter:point];
 }
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if ( event.subtype == UIEventSubtypeMotionShake )
+    {
+        [squareImageView setCenter:firstCenter];
+    }
+    
+    if ( [super respondsToSelector:@selector(motionEnded:withEvent:)] )
+        [super motionEnded:motion withEvent:event];
+}
+
+- (BOOL)canBecomeFirstResponder
+{ return YES; }
 
 @end
