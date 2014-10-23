@@ -15,6 +15,7 @@
 		F182334619F8F57D008E6510 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F182334519F8F57D008E6510 /* Images.xcassets */; };
 		F182334919F8F57D008E6510 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F182334719F8F57D008E6510 /* LaunchScreen.xib */; };
 		F182335519F8F57D008E6510 /* PanGestureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F182335419F8F57D008E6510 /* PanGestureTests.m */; };
+		F182336119F8F58D008E6510 /* WNView.m in Sources */ = {isa = PBXBuildFile; fileRef = F182336019F8F58D008E6510 /* WNView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 		F182334E19F8F57D008E6510 /* PanGestureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PanGestureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F182335319F8F57D008E6510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F182335419F8F57D008E6510 /* PanGestureTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PanGestureTests.m; sourceTree = "<group>"; };
+		F182335F19F8F58D008E6510 /* WNView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WNView.h; sourceTree = "<group>"; };
+		F182336019F8F58D008E6510 /* WNView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WNView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 		F182333419F8F57D008E6510 /* PanGesture */ = {
 			isa = PBXGroup;
 			children = (
+				F182335E19F8F586008E6510 /* View */,
 				F182333919F8F57D008E6510 /* AppDelegate.h */,
 				F182333A19F8F57D008E6510 /* AppDelegate.m */,
 				F182333F19F8F57D008E6510 /* ViewController.h */,
@@ -120,6 +124,15 @@
 				F182335319F8F57D008E6510 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F182335E19F8F586008E6510 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F182335F19F8F58D008E6510 /* WNView.h */,
+				F182336019F8F58D008E6510 /* WNView.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +239,7 @@
 				F182333E19F8F57D008E6510 /* PanGesture.xcdatamodeld in Sources */,
 				F182334119F8F57D008E6510 /* ViewController.m in Sources */,
 				F182333819F8F57D008E6510 /* main.m in Sources */,
+				F182336119F8F58D008E6510 /* WNView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +361,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = PanGesture/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -357,7 +373,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = PanGesture/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
