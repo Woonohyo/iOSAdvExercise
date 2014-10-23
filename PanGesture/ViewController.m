@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController () {
+@interface ViewController () <UIGestureRecognizerDelegate> {
     __weak IBOutlet UIImageView *_squareImageView;
     CGPoint _firstCenter;
     CGFloat _lastRotation;
@@ -20,23 +20,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
     [panRecognizer setMinimumNumberOfTouches:1];
-    [panRecognizer setMaximumNumberOfTouches:1];
+    [panRecognizer setMaximumNumberOfTouches:2];
+    [panRecognizer setDelegate:self];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(tapGestureRecogznied:)];
     [tapRecognizer setNumberOfTapsRequired:2];
     
     UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureRecognized:)];
+    [pinchRecognizer setDelegate:self];
     
     UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationGestureRecognized:)];
     
+    [rotationRecognizer setDelegate:self];
     
     [self.view addGestureRecognizer:tapRecognizer];
     [_squareImageView addGestureRecognizer:panRecognizer];
     [self.view addGestureRecognizer:pinchRecognizer];
     [self.view addGestureRecognizer:rotationRecognizer];
+    
+    // 핀치로 확대/축소할 때 Center 유지
     [_squareImageView setTranslatesAutoresizingMaskIntoConstraints:YES];
     
     _firstCenter = [_squareImageView center];
@@ -114,6 +120,7 @@
     
     // 손을 떼는 순간 초기화
     if(rec.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"ended");
         _lastRotation = 0.0f;
         return;
     }
@@ -121,11 +128,15 @@
     // 부호 반대로
     CGFloat rotation = 0.0 - (_lastRotation - [rec rotation]);
     
+    
     CGAffineTransform currentTransform = _squareImageView.transform;
     CGAffineTransform newTransform = CGAffineTransformRotate(currentTransform, rotation);
     [_squareImageView setTransform:newTransform];
     _lastRotation = [rec rotation];
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
 
 @end
