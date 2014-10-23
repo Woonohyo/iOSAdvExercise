@@ -23,6 +23,13 @@
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
     [panRecognizer setMinimumNumberOfTouches:1];
     [panRecognizer setMaximumNumberOfTouches:1];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(tapGestureRecogznied:)];
+    [tapRecognizer setNumberOfTapsRequired:2];
+    
+    
+    [self.view addGestureRecognizer:tapRecognizer];
     [squareImageView addGestureRecognizer:panRecognizer];
     NSLog(@"%@", panRecognizer);
 }
@@ -52,6 +59,13 @@
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded) {
         [[rec view] setCenter:CGPointMake(firstX, firstY)];
     }
+}
+
+- (void) tapGestureRecogznied:(id)sender {
+    UIPanGestureRecognizer *rec = (UIPanGestureRecognizer*)sender;
+    CGPoint point = [rec locationInView:self.view];
+    NSLog(@"%f %f", point.x, point.y);
+    [squareImageView setCenter:point];
 }
 
 @end
