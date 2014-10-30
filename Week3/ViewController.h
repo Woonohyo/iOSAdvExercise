@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class SecondTableViewController;
+
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *secondButton;
+@property (nonatomic, strong) SecondTableViewController *secondTableViewController;
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "SecondTableViewController.h"
 
 @interface ViewController ()
 
@@ -22,6 +23,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)touchMeButtonTouched:(id)sender {
+    NSLog(@"touched");
+    UIStoryboard *secondStoryboard = [UIStoryboard storyboardWithName:@"Second" bundle:nil];
+    self.secondTableViewController = [secondStoryboard instantiateViewControllerWithIdentifier:@"Second"];
+    [self presentViewController:_secondTableViewController animated:YES completion:nil];
 }
 
 @end
