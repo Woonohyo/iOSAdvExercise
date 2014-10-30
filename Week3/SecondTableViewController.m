@@ -8,6 +8,7 @@
 
 #import "SecondTableViewController.h"
 #import "ThirdViewController.h"
+#import "CalendarViewController.h"
 
 @interface SecondTableViewController ()
 @end
@@ -35,7 +36,11 @@
         self.thirdViewController = [[ThirdViewController alloc] initWithNibName:@"ThirdViewController" bundle:nil];
         [self presentViewController:_thirdViewController animated:YES completion:nil];
     }
-    
+    else if (indexPath.row == 1) {
+        self.calendarViewController = [[CalendarViewController alloc] init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:_calendarViewController];
+        [self presentViewController:navController animated:YES completion:nil];
+    }
 }
 
 /*

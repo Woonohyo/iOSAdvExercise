@@ -18,6 +18,8 @@
 		F1039D6F1A0220AA00A468EE /* SecondTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1039D6E1A0220AA00A468EE /* SecondTableViewController.m */; };
 		F1039D731A02264500A468EE /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1039D711A02264500A468EE /* ThirdViewController.m */; };
 		F1039D741A02264500A468EE /* ThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1039D721A02264500A468EE /* ThirdViewController.xib */; };
+		F1039D771A022A5F00A468EE /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1039D761A022A5F00A468EE /* CalendarViewController.m */; };
+		F1039D7A1A022D5B00A468EE /* CalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1039D791A022D5B00A468EE /* CalendarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,10 @@
 		F1039D701A02264500A468EE /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
 		F1039D711A02264500A468EE /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		F1039D721A02264500A468EE /* ThirdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdViewController.xib; sourceTree = "<group>"; };
+		F1039D751A022A5F00A468EE /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		F1039D761A022A5F00A468EE /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		F1039D781A022D5B00A468EE /* CalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarView.h; sourceTree = "<group>"; };
+		F1039D791A022D5B00A468EE /* CalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,10 @@
 				F1039D701A02264500A468EE /* ThirdViewController.h */,
 				F1039D711A02264500A468EE /* ThirdViewController.m */,
 				F1039D721A02264500A468EE /* ThirdViewController.xib */,
+				F1039D751A022A5F00A468EE /* CalendarViewController.h */,
+				F1039D761A022A5F00A468EE /* CalendarViewController.m */,
+				F1039D781A022D5B00A468EE /* CalendarView.h */,
+				F1039D791A022D5B00A468EE /* CalendarView.m */,
 			);
 			path = Week3;
 			sourceTree = "<group>";
@@ -246,9 +256,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1039D4D1A021E0A00A468EE /* ViewController.m in Sources */,
+				F1039D7A1A022D5B00A468EE /* CalendarView.m in Sources */,
 				F1039D731A02264500A468EE /* ThirdViewController.m in Sources */,
 				F1039D6F1A0220AA00A468EE /* SecondTableViewController.m in Sources */,
 				F1039D4A1A021E0A00A468EE /* AppDelegate.m in Sources */,
+				F1039D771A022A5F00A468EE /* CalendarViewController.m in Sources */,
 				F1039D471A021E0A00A468EE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

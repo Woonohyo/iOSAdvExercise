@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class ThirdViewController;
+@class CalendarViewController;
 
 @interface SecondTableViewController : UITableViewController
 
 @property (nonatomic, strong) ThirdViewController *thirdViewController;
+@property (nonatomic, strong) CalendarViewController *calendarViewController;
 
 @end
