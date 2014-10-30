@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class ThirdViewController;
+
 @interface SecondTableViewController : UITableViewController
+
+@property (nonatomic, strong) ThirdViewController *thirdViewController;
 
 @end

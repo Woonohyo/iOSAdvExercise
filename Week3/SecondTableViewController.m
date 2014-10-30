@@ -7,9 +7,9 @@
 //
 
 #import "SecondTableViewController.h"
+#import "ThirdViewController.h"
 
 @interface SecondTableViewController ()
-
 @end
 
 @implementation SecondTableViewController
@@ -29,18 +29,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 4;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        self.thirdViewController = [[ThirdViewController alloc] initWithNibName:@"ThirdViewController" bundle:nil];
+        [self presentViewController:_thirdViewController animated:YES completion:nil];
+    }
+    
 }
 
 /*

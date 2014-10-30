@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  ThirdViewController.h
 //  Week3
 //
 //  Created by Wonhyo Yi on 2014. 10. 30..
@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface ThirdViewController : UIViewController
 
 @end
-
